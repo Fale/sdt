@@ -32,8 +32,12 @@ func (t Ticks) Ticks(min, max float64) []plot.Tick {
 			if tm.Day() == 1 || tm.Day() == 15 {
 				tick.Label = tm.Format(t.Format)
 			}
-		default:
+		case delta < 47347200: // 18 months
 			if tm.Day() == 1 {
+				tick.Label = tm.Format(t.Format)
+			}
+		default:
+			if tm.Day() == 1 && tm.Month() == time.January {
 				tick.Label = tm.Format(t.Format)
 			}
 		}

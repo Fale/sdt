@@ -11,10 +11,7 @@ import (
 )
 
 func main() {
-	p, err := plot.New()
-	if err != nil {
-		return
-	}
+	p := plot.New()
 
 	line := plotter.XYs{
 		plotter.XY{X: float64(time.Date(2021, time.June, 10, 0, 0, 0, 0, time.UTC).Unix()), Y: float64(4)},
@@ -25,10 +22,7 @@ func main() {
 	}
 
 	p.Add(plotter.NewGrid())
-	err = plotutil.AddLinePoints(p,
-		"First", line,
-	)
-	if err != nil {
+	if err := plotutil.AddLinePoints(p, "First", line); err != nil {
 		return
 	}
 
@@ -37,5 +31,4 @@ func main() {
 	if err := p.Save(10*vg.Inch, 5*vg.Inch, "points.png"); err != nil {
 		return
 	}
-	return
 }
